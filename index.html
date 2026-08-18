@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViperX - Control Center</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Kanit & Rajdhani -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: #080808;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.25) 0%, transparent 60%),
+                radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.9) 0%, #050505 100%);
+        }
+        
+        .en-text {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Neon Glow Effect */
+        .glow-red {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.35);
+        }
+        
+        .glow-red-strong {
+            box-shadow: 0 0 35px rgba(239, 68, 68, 0.6);
+        }
+
+        .btn-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-100 flex items-center justify-center p-4 sm:p-6">
+
+    <!-- Containerหลัก -->
+    <div class="max-w-xl w-full bg-neutral-900/90 backdrop-blur-xl border border-red-600/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden glow-red">
+        
+        <!-- แสงเลเซอร์ตกแต่งมุมบน -->
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-red-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-red-600/20 rounded-full blur-3xl"></div>
+
+        <!-- LOGO VIPERX & HEADER -->
+        <div class="text-center mb-8 relative z-10">
+            <div class="inline-block p-3 bg-neutral-950/80 rounded-2xl border border-red-500/20 shadow-inner mb-4">
+                <!-- โลโก้ ViperX -->
+                <img src="https://i.postimg.cc/N0Zdj3mm/8AAB097B-86E6-45FF-B7F6-9E9CDEFEB305.png" 
+                     alt="ViperX Logo" 
+                     class="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_0_12px_rgba(239,68,68,0.5)]">
+            </div>
+            
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-wider text-white uppercase">
+                ศูนย์ควบคุม <span class="text-red-500">VIPERX</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-gray-400 font-light mt-1">
+                ศูนย์รวมการตั้งค่า คู่มือการใช้งาน และระบบจัดการยิงตรงจาก ViperX
+            </p>
+        </div>
+
+        <!-- BUTTONS LIST -->
+        <div class="space-y-5 relative z-10">
+
+            <!-- ปุ่มที่ 1: สอนติดตั้ง (YouTube) -->
+            <div class="btn-card bg-neutral-950/70 border border-neutral-800 hover:border-red-600/60 rounded-2xl p-4 shadow-lg group">
+                <a href="https://youtu.be/LCJ8Q6qg6w4?si=NZrFdahrpHYKSD-X" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-900 group-hover:from-red-950/80 group-hover:to-neutral-900 border border-neutral-700/50 group-hover:border-red-600/50 text-white p-3.5 rounded-xl transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-download text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold tracking-wide group-hover:text-red-400 transition-colors">สอนติดตั้ง</div>
+                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest">Installation Guide</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-red-500 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <p class="text-xs text-gray-400 mt-2.5 px-2 flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-red-500 text-[11px] mt-0.5"></i>
+                    <span>แนะนำขั้นตอนการดาวน์โหลดและติดตั้งโปรแกรม ViperX อย่างถูกต้อง ปลอดภัย ไม่ติดไวรัส</span>
+                </p>
+            </div>
+
+            <!-- ปุ่มที่ 2: ลิ้งพาแนล (MAIN SYSTEM - เว็บไซต์หลัก) -->
+            <div class="btn-card bg-gradient-to-b from-red-950/40 to-neutral-950/90 border-2 border-red-600/80 rounded-2xl p-4 shadow-2xl glow-red-strong relative">
+                <!-- Badge ตัวท็อป -->
+                <span class="absolute -top-3 right-6 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider shadow-lg border border-red-400/30">
+                    <i class="fa-solid fa-bolt mr-1"></i> Control Panel
+                </span>
+
+                <a href="https://viper-x.mrpcs.online" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white p-4 rounded-xl shadow-lg transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-lg bg-black/20 flex items-center justify-center text-white text-xl">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div>
+                            <div class="text-xl font-extrabold tracking-wide text-shadow">ลิ้งพาแนล (WEB PANEL)</div>
+                            <div class="text-[11px] text-red-100 en-text font-bold uppercase tracking-widest">Access Control Center</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-lg text-white group-hover:scale-110 transition-transform"></i>
+                </a>
+                <p class="text-xs text-gray-300 mt-2.5 px-2 flex items-start gap-2 font-normal">
+                    <i class="fa-solid fa-fire text-red-400 text-[11px] mt-0.5"></i>
+                    <span>ทางเข้าสู่ระบบจัดการสมาชิก ควบคุมสคริปต์/คีย์ และการตั้งค่าใช้งานหลักทั้งหมด</span>
+                </p>
+            </div>
+
+            <!-- ปุ่มที่ 3: สอนใช้งาน (Google Drive) -->
+            <div class="btn-card bg-neutral-950/70 border border-neutral-800 hover:border-red-600/60 rounded-2xl p-4 shadow-lg group">
+                <a href="https://drive.google.com/file/d/1FVYUBQEnl-iRe1M5R1yMvGz2NhvrgDqd/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-900 group-hover:from-red-950/80 group-hover:to-neutral-900 border border-neutral-700/50 group-hover:border-red-600/50 text-white p-3.5 rounded-xl transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-book-open text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold tracking-wide group-hover:text-red-400 transition-colors">สอนใช้งาน</div>
+                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest">Usage Tutorial</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-red-500 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <p class="text-xs text-gray-400 mt-2.5 px-2 flex items-start gap-2">
+                    <i class="fa-solid fa-circle-question text-red-500 text-[11px] mt-0.5"></i>
+                    <span>รวมคลิปวิดีโอสอนตั้งค่า วิธีแก้ปัญหาเบื้องต้น และเทคนิคการใช้งานให้มีประสิทธิภาพสูงสุด</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="mt-8 pt-4 border-t border-neutral-800/80 text-center relative z-10">
+            <p class="text-xs text-gray-500 font-light">
+                &copy; 2026 <span class="text-red-500 font-semibold">VIPERX</span>. All rights reserved.
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
