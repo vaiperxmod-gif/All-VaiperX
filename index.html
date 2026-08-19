@@ -3,185 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViperX - Control Center</title>
+    <title>VIPERX - Next-Gen Control Center</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Kanit & Rajdhani -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Kanit, Rajdhani & Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body {
             font-family: 'Kanit', sans-serif;
-            background: #080808;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.25) 0%, transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.9) 0%, #050505 100%);
+            background: #030303;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
         }
         
         .en-text {
             font-family: 'Rajdhani', sans-serif;
         }
 
-        /* Neon Glow Effect */
-        .glow-red {
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.35);
+        /* Animated Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+            animation: orbFloat 10s infinite alternate ease-in-out;
         }
         
-        .glow-red-strong {
-            box-shadow: 0 0 35px rgba(239, 68, 68, 0.6);
+        .orb-1 {
+            width: 350px;
+            height: 350px;
+            background: #dc2626;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .btn-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: #991b1b;
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -3s;
         }
 
-        .btn-card:hover {
-            transform: translateY(-3px);
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: #4f46e5;
+            bottom: 20%;
+            right: -50px;
+            opacity: 0.25;
+            animation-delay: -5s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(30px) scale(1.1); }
+        }
+
+        /* Sci-Fi Grid Overlay */
+        .bg-grid {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Cyber Glass Box */
+        .cyber-glass {
+            background: rgba(13, 13, 15, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9),
+                        inset 0 0 20px rgba(220, 38, 38, 0.1);
+        }
+
+        /* Button Glow & Hover Styles */
+        .btn-aurora {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-aurora::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 1rem;
+            background: linear-gradient(90deg, #dc2626, transparent, #dc2626);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-aurora:hover::before {
+            opacity: 1;
+        }
+
+        .btn-aurora:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.5);
+        }
+
+        /* Main Panel Special Glow */
+        .main-panel-glow {
+            box-shadow: 0 0 35px rgba(220, 38, 38, 0.4),
+                        inset 0 0 15px rgba(239, 68, 68, 0.2);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.3); }
+            100% { box-shadow: 0 0 45px rgba(239, 68, 68, 0.6); }
+        }
+
+        /* Pulse Dot Animation */
+        .status-dot {
+            box-shadow: 0 0 10px #ef4444;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
     </style>
 </head>
-<body class="min-h-screen text-gray-100 flex items-center justify-center p-4 sm:p-6">
+<body class="min-h-screen text-gray-100 flex items-center justify-center p-4 sm:p-6 bg-grid relative selection:bg-red-600 selection:text-white">
 
-    <!-- Containerหลัก -->
-    <div class="max-w-xl w-full bg-neutral-900/90 backdrop-blur-xl border border-red-600/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden glow-red my-6">
+    <!-- Ambient Glowing Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- MAIN CARD CONTAINER -->
+    <div class="max-w-lg w-full cyber-glass rounded-3xl p-6 sm:p-8 relative z-10 my-8 overflow-hidden">
         
-        <!-- แสงเลเซอร์ตกแต่งมุมบน -->
-        <div class="absolute -top-10 -left-10 w-32 h-32 bg-red-600/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-red-600/20 rounded-full blur-3xl"></div>
+        <!-- Top Laser Indicator Line -->
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent shadow-[0_0_15px_#ef4444]"></div>
 
-        <!-- LOGO VIPERX & HEADER -->
-        <div class="text-center mb-8 relative z-10">
-            <div class="inline-block p-3 bg-neutral-950/80 rounded-2xl border border-red-500/20 shadow-inner mb-4">
-                <!-- โลโก้ ViperX -->
-                <img src="https://i.postimg.cc/N0Zdj3mm/8AAB097B-86E6-45FF-B7F6-9E9CDEFEB305.png" 
-                     alt="ViperX Logo" 
-                     class="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_0_12px_rgba(239,68,68,0.5)]">
+        <!-- HEADER & BRANDING -->
+        <div class="text-center mb-8 relative">
+            
+            <!-- Online Status Badge -->
+            <div class="inline-flex items-center gap-2 bg-red-950/60 border border-red-600/40 px-3.5 py-1 rounded-full text-[11px] font-semibold text-red-400 mb-4 tracking-wider uppercase backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-red-500 status-dot"></span>
+                VIPERX SYSTEM ONLINE
+            </div>
+
+            <!-- Logo Wrapper with Cyber Frame -->
+            <div class="relative inline-block group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-red-600 to-rose-600 rounded-2xl blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
+                <div class="relative p-4 bg-black/80 rounded-2xl border border-red-500/30 backdrop-blur-xl">
+                    <img src="https://i.postimg.cc/N0Zdj3mm/8AAB097B-86E6-45FF-B7F6-9E9CDEFEB305.png" 
+                         alt="ViperX Logo" 
+                         class="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] transform group-hover:scale-105 transition duration-300">
+                </div>
             </div>
             
-            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-wider text-white uppercase">
-                ศูนย์ควบคุม <span class="text-red-500">VIPERX</span>
+            <!-- Title -->
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider text-white uppercase mt-4 font-orbitron">
+                VIPER<span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-500 to-red-600">X</span>
             </h1>
-            <p class="text-xs sm:text-sm text-gray-400 font-light mt-1">
-                ศูนย์รวมการสั่งซื้อ การตั้งค่า คู่มือใช้งาน และติดต่อทีมงาน ViperX
+            <p class="text-xs sm:text-sm text-gray-400 font-light mt-1 max-w-xs mx-auto leading-relaxed">
+                ศูนย์รวมระบบการตั้งค่า คู่มือสั่งซื้อ และช่องทางช่วยเหลืออย่างเป็นทางการ
             </p>
         </div>
 
         <!-- BUTTONS LIST -->
-        <div class="space-y-4 relative z-10">
+        <div class="space-y-4">
 
-            <!-- ปุ่มที่ 1: ซื้อพาแนล (ร้านค้า) -->
-            <div class="btn-card bg-neutral-950/70 border border-neutral-800 hover:border-red-600/60 rounded-2xl p-4 shadow-lg group">
-                <a href="https://vaiperxmod.vexzy.xyz" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-900 group-hover:from-red-950/80 group-hover:to-neutral-900 border border-neutral-700/50 group-hover:border-red-600/50 text-white p-3.5 rounded-xl transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-10 h-10 rounded-lg bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all">
-                            <i class="fa-solid fa-cart-shopping text-lg"></i>
+            <!-- 1. ซื้อพาแนล (STORE) -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
+                <a href="https://vaiperxmod.vexzy.xyz" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-neutral-900 border border-red-600/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
+                            <i class="fa-solid fa-cart-shopping text-xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold tracking-wide group-hover:text-red-400 transition-colors">ซื้อพาแนล</div>
-                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest">Buy Panel Store</div>
+                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">ซื้อพาแนล</div>
+                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Store & Automatic Key</div>
                         </div>
                     </div>
-                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-red-500 group-hover:translate-x-1 transition-all"></i>
+                    <div class="w-8 h-8 rounded-lg bg-neutral-800/80 border border-neutral-700/50 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:border-red-500 transition-all">
+                        <i class="fa-solid fa-chevron-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+                    </div>
                 </a>
-                <p class="text-xs text-gray-400 mt-2 px-2 flex items-start gap-2">
-                    <i class="fa-solid fa-store text-red-500 text-[11px] mt-0.5"></i>
-                    <span>สั่งซื้อคีย์/แพ็กเกจพาแนล ViperX ผ่านเว็บร้านค้าอัตโนมัติ สะดวก รวดเร็ว</span>
+                <p class="text-xs text-gray-400 mt-2.5 pt-2 border-t border-neutral-800/50 flex items-center gap-2">
+                    <i class="fa-solid fa-store text-red-500 text-[10px]"></i>
+                    <span>สั่งซื้อคีย์/แพ็กเกจพาแนล ViperX ผ่านเว็บร้านค้าอัตโนมัติ 24 ชม.</span>
                 </p>
             </div>
 
-            <!-- ปุ่มที่ 2: ลิ้งพาแนล (MAIN SYSTEM - เว็บไซต์หลัก เด่นสุด) -->
-            <div class="btn-card bg-gradient-to-b from-red-950/40 to-neutral-950/90 border-2 border-red-600/80 rounded-2xl p-4 shadow-2xl glow-red-strong relative">
-                <!-- Badge ตัวท็อป -->
-                <span class="absolute -top-3 right-6 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider shadow-lg border border-red-400/30">
-                    <i class="fa-solid fa-bolt mr-1"></i> Control Panel
-                </span>
+            <!-- 2. ลิ้งพาแนล (MAIN HIGHLIGHT - CONTROL PANEL) -->
+            <div class="btn-aurora bg-gradient-to-br from-red-950/70 via-neutral-900/90 to-black border-2 border-red-600/80 rounded-2xl p-4 main-panel-glow relative group overflow-hidden">
+                <!-- Highlight Badge -->
+                <div class="absolute -top-1 -right-1 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[9px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg font-orbitron">
+                    <i class="fa-solid fa-bolt mr-1"></i> MAIN SYSTEM
+                </div>
 
-                <a href="https://viper-x.mrpcs.online" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white p-4 rounded-xl shadow-lg transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-11 h-11 rounded-lg bg-black/20 flex items-center justify-center text-white text-xl">
+                <a href="https://viper-x.mrpcs.online" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between mt-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white text-2xl shadow-lg shadow-red-600/50 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-sliders"></i>
                         </div>
                         <div>
-                            <div class="text-xl font-extrabold tracking-wide text-shadow">ลิ้งพาแนล (WEB PANEL)</div>
-                            <div class="text-[11px] text-red-100 en-text font-bold uppercase tracking-widest">Access Control Center</div>
+                            <div class="text-xl font-extrabold text-white tracking-wide">ลิ้งพาแนล <span class="text-red-400">(WEB PANEL)</span></div>
+                            <div class="text-[10px] text-red-200 en-text font-bold uppercase tracking-widest">Access Control Center</div>
                         </div>
                     </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-lg text-white group-hover:scale-110 transition-transform"></i>
+                    <div class="w-9 h-9 rounded-xl bg-red-600/30 border border-red-500/60 flex items-center justify-center text-white group-hover:bg-red-600 transition-all">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-sm group-hover:scale-110 transition-transform"></i>
+                    </div>
                 </a>
-                <p class="text-xs text-gray-300 mt-2 px-2 flex items-start gap-2 font-normal">
-                    <i class="fa-solid fa-fire text-red-400 text-[11px] mt-0.5"></i>
-                    <span>ทางเข้าสู่ระบบจัดการสมาชิก ควบคุมสคริปต์/คีย์ และการตั้งค่าใช้งานหลักทั้งหมด</span>
+                <p class="text-xs text-gray-200 mt-3 pt-2 border-t border-red-900/40 flex items-center gap-2 font-normal">
+                    <i class="fa-solid fa-fire text-red-400 text-[10px]"></i>
+                    <span>ทางเข้าสู่ระบบจัดการสมาชิก ควบคุมสคริปต์ และการตั้งค่าใช้งานหลักทั้งหมด</span>
                 </p>
             </div>
 
-            <!-- ปุ่มที่ 3: สอนติดตั้ง (YouTube) -->
-            <div class="btn-card bg-neutral-950/70 border border-neutral-800 hover:border-red-600/60 rounded-2xl p-4 shadow-lg group">
-                <a href="https://youtu.be/LCJ8Q6qg6w4?si=NZrFdahrpHYKSD-X" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-900 group-hover:from-red-950/80 group-hover:to-neutral-900 border border-neutral-700/50 group-hover:border-red-600/50 text-white p-3.5 rounded-xl transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-10 h-10 rounded-lg bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all">
-                            <i class="fa-solid fa-download text-lg"></i>
+            <!-- 3. สอนติดตั้ง (INSTALL GUIDE) -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
+                <a href="https://youtu.be/LCJ8Q6qg6w4?si=NZrFdahrpHYKSD-X" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-neutral-900 border border-red-600/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
+                            <i class="fa-solid fa-download text-xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold tracking-wide group-hover:text-red-400 transition-colors">สอนติดตั้ง</div>
-                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest">Installation Guide</div>
+                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">สอนติดตั้ง</div>
+                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Installation Guide (YouTube)</div>
                         </div>
                     </div>
-                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-red-500 group-hover:translate-x-1 transition-all"></i>
+                    <div class="w-8 h-8 rounded-lg bg-neutral-800/80 border border-neutral-700/50 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:border-red-500 transition-all">
+                        <i class="fa-solid fa-chevron-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+                    </div>
                 </a>
-                <p class="text-xs text-gray-400 mt-2 px-2 flex items-start gap-2">
-                    <i class="fa-solid fa-circle-info text-red-500 text-[11px] mt-0.5"></i>
-                    <span>แนะนำขั้นตอนการดาวน์โหลดและติดตั้งโปรแกรม ViperX อย่างถูกต้อง ปลอดภัย ไม่ติดไวรัส</span>
+                <p class="text-xs text-gray-400 mt-2.5 pt-2 border-t border-neutral-800/50 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-red-500 text-[10px]"></i>
+                    <span>แนะนำขั้นตอนการดาวน์โหลดและติดตั้งโปรแกรม ViperX อย่างถูกต้อง ปลอดภัย</span>
                 </p>
             </div>
 
-            <!-- ปุ่มที่ 4: สอนใช้งาน (Google Drive) -->
-            <div class="btn-card bg-neutral-950/70 border border-neutral-800 hover:border-red-600/60 rounded-2xl p-4 shadow-lg group">
-                <a href="https://drive.google.com/file/d/1FVYUBQEnl-iRe1M5R1yMvGz2NhvrgDqd/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-900 group-hover:from-red-950/80 group-hover:to-neutral-900 border border-neutral-700/50 group-hover:border-red-600/50 text-white p-3.5 rounded-xl transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-10 h-10 rounded-lg bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all">
-                            <i class="fa-solid fa-book-open text-lg"></i>
+            <!-- 4. สอนใช้งาน (USAGE TUTORIAL) -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
+                <a href="https://drive.google.com/file/d/1hTwyCv9JmFAK7q6RGlC1VGUFRbxQI8ry/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-neutral-900 border border-red-600/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
+                            <i class="fa-solid fa-play text-xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold tracking-wide group-hover:text-red-400 transition-colors">สอนใช้งาน</div>
-                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest">Usage Tutorial</div>
+                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">สอนใช้งาน</div>
+                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Video Tutorial (Google Drive)</div>
                         </div>
                     </div>
-                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-red-500 group-hover:translate-x-1 transition-all"></i>
+                    <div class="w-8 h-8 rounded-lg bg-neutral-800/80 border border-neutral-700/50 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:border-red-500 transition-all">
+                        <i class="fa-solid fa-chevron-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+                    </div>
                 </a>
-                <p class="text-xs text-gray-400 mt-2 px-2 flex items-start gap-2">
-                    <i class="fa-solid fa-circle-question text-red-500 text-[11px] mt-0.5"></i>
-                    <span>รวมคลิปวิดีโอสอนตั้งค่า วิธีแก้ปัญหาเบื้องต้น และเทคนิคการใช้งานให้มีประสิทธิภาพสูงสุด</span>
+                <p class="text-xs text-gray-400 mt-2.5 pt-2 border-t border-neutral-800/50 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question text-red-500 text-[10px]"></i>
+                    <span>รวมคลิปวิดีโอสอนตั้งค่า วิธีแก้ปัญหา และเทคนิคใช้งานให้เต็มประสิทธิภาพ</span>
                 </p>
             </div>
 
-            <!-- ปุ่มที่ 5: แจ้งปัญหา ดิสคอร์ด (Discord Support) -->
-            <div class="btn-card bg-neutral-950/70 border border-neutral-800 hover:border-indigo-600/60 rounded-2xl p-4 shadow-lg group">
-                <a href="https://discord.gg/A8Y6pbddRr" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-gradient-to-r from-neutral-800 to-neutral-900 group-hover:from-indigo-950/80 group-hover:to-neutral-900 border border-neutral-700/50 group-hover:border-indigo-500/50 text-white p-3.5 rounded-xl transition-all">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-10 h-10 rounded-lg bg-indigo-600/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                            <i class="fa-brands fa-discord text-xl"></i>
+            <!-- 5. แจ้งปัญหา ดิสคอร์ด (DISCORD SUPPORT) -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-indigo-500/50 rounded-2xl p-4 group">
+                <a href="https://discord.gg/A8Y6pbddRr" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-950 to-neutral-900 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-md">
+                            <i class="fa-brands fa-discord text-2xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold tracking-wide group-hover:text-indigo-400 transition-colors">แจ้งปัญหา ดิสคอร์ด</div>
-                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest">Discord Support Server</div>
+                            <div class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">แจ้งปัญหา ดิสคอร์ด</div>
+                            <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Discord Official Support</div>
                         </div>
                     </div>
-                    <i class="fa-solid fa-headset text-gray-500 group-hover:text-indigo-400 group-hover:scale-110 transition-all"></i>
+                    <div class="w-8 h-8 rounded-lg bg-neutral-800/80 border border-neutral-700/50 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:border-indigo-500 transition-all">
+                        <i class="fa-solid fa-headset text-xs group-hover:scale-110 transition-transform"></i>
+                    </div>
                 </a>
-                <p class="text-xs text-gray-400 mt-2 px-2 flex items-start gap-2">
-                    <i class="fa-solid fa-comments text-indigo-400 text-[11px] mt-0.5"></i>
-                    <span>เข้าร่วมเซิร์ฟเวอร์ Discord เพื่อสอบถาม แจ้งปัญหาการใช้งาน หรือขอความช่วยเหลือจากทีมงาน</span>
+                <p class="text-xs text-gray-400 mt-2.5 pt-2 border-t border-neutral-800/50 flex items-center gap-2">
+                    <i class="fa-solid fa-comments text-indigo-400 text-[10px]"></i>
+                    <span>เข้าร่วมเซิร์ฟเวอร์ Discord เพื่อสอบถาม ติดต่อทีมงาน หรือแจ้งปัญหาการใช้งาน</span>
                 </p>
             </div>
 
         </div>
 
         <!-- FOOTER -->
-        <div class="mt-8 pt-4 border-t border-neutral-800/80 text-center relative z-10">
-            <p class="text-xs text-gray-500 font-light">
-                &copy; 2026 <span class="text-red-500 font-semibold">VIPERX</span>. All rights reserved.
+        <div class="mt-8 pt-4 border-t border-neutral-800/80 text-center relative">
+            <p class="text-[11px] text-gray-500 font-light tracking-wide">
+                &copy; 2026 <span class="text-red-500 font-bold font-orbitron">VIPERX COMMUNITY</span>. ALL RIGHTS RESERVED.
             </p>
         </div>
 
