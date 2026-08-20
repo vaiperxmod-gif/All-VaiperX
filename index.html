@@ -99,6 +99,15 @@
             0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.6)); }
             100% { transform: scale(1.1); filter: drop-shadow(0 0 25px rgba(239, 68, 68, 1)); }
         }
+
+        /* Arrow Bounce Animation */
+        .bounce-arrow {
+            animation: bounceDown 1s infinite alternate;
+        }
+        @keyframes bounceDown {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(8px); }
+        }
     </style>
 </head>
 <body class="min-h-screen text-gray-100 flex items-center justify-center p-4 sm:p-6 bg-grid relative selection:bg-red-600 selection:text-white">
@@ -113,7 +122,7 @@
         <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent shadow-[0_0_15px_#ef4444]"></div>
 
         <!-- HEADER -->
-        <div class="text-center mb-8 relative">
+        <div class="text-center mb-6 relative">
             <div class="inline-flex items-center gap-2 bg-red-950/60 border border-red-600/40 px-3.5 py-1 rounded-full text-[11px] font-semibold text-red-400 mb-4 tracking-wider uppercase backdrop-blur-md">
                 <span class="w-2 h-2 rounded-full bg-red-500 status-dot"></span>
                 VIPERX SYSTEM ONLINE
@@ -129,23 +138,53 @@
             <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider text-white uppercase mt-4 font-orbitron">
                 VIPER<span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-500 to-red-600">X</span>
             </h1>
-            <p class="text-xs sm:text-sm text-gray-400 font-light mt-1 max-w-xs mx-auto leading-relaxed">
-                ศูนย์รวมระบบการตั้งค่า คู่มือสั่งซื้อ และช่องทางช่วยเหลืออย่างเป็นทางการ
-            </p>
         </div>
 
-        <!-- BUTTONS LIST -->
+        <!-- 📌 STEP INSTRUCTION BANNER (คำอธิบายขั้นตอนการติดตั้ง 1-2-3 เด่นๆ บนสุด) -->
+        <div class="bg-gradient-to-r from-red-950/90 via-neutral-900 to-red-950/90 border border-red-500/40 rounded-2xl p-4 mb-6 relative overflow-hidden shadow-lg">
+            <div class="flex items-center gap-2.5 mb-2">
+                <span class="flex h-3 w-3 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                </span>
+                <h3 class="text-sm font-extrabold text-white tracking-wide uppercase font-orbitron">
+                    ขั้นตอนการเริ่มใช้งาน (โปรดทำตามลำดับ)
+                </h3>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed font-light">
+                สำหรับผู้ใช้งานใหม่ กรุณาทำตามปุ่มลำดับตัวเลขด้านล่าง <span class="text-red-400 font-bold underline">1 ➔ 2 ➔ 3</span> เพื่อการใช้งานที่ถูกต้องและไม่โดนแบน
+            </p>
+            <div class="grid grid-cols-3 gap-2 mt-3 text-center text-[11px] font-semibold">
+                <div class="bg-black/60 border border-red-900/60 py-1.5 px-1 rounded-lg text-red-300">
+                    <span class="block font-orbitron text-red-500 font-bold text-[10px]">STEP 1</span>
+                    สอนติดตั้ง
+                </div>
+                <div class="bg-black/60 border border-red-900/60 py-1.5 px-1 rounded-lg text-red-300">
+                    <span class="block font-orbitron text-red-500 font-bold text-[10px]">STEP 2</span>
+                    สอนใช้งาน
+                </div>
+                <div class="bg-black/60 border border-red-900/60 py-1.5 px-1 rounded-lg text-red-300">
+                    <span class="block font-orbitron text-red-500 font-bold text-[10px]">STEP 3</span>
+                    เข้าพาแนล
+                </div>
+            </div>
+        </div>
+
+        <!-- BUTTONS LIST (เรียงลำดับพร้อมป้ายกำกับ STEP) -->
         <div class="space-y-4">
 
-            <!-- 1. สอนติดตั้ง -->
-            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
-                <a href="https://youtu.be/LCJ8Q6qg6w4?si=NZrFdahrpHYKSD-X" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+            <!-- STEP 1: สอนติดตั้ง -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group relative overflow-hidden">
+                <span class="absolute top-2 right-3 text-[10px] font-extrabold text-red-500/80 font-orbitron tracking-widest bg-red-950/40 px-2 py-0.5 rounded-md border border-red-900/30">
+                    STEP 1
+                </span>
+                <a href="https://youtu.be/LCJ8Q6qg6w4?si=NZrFdahrpHYKSD-X" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between mt-1">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-neutral-900 border border-red-600/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
                             <i class="fa-solid fa-download text-xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">สอนติดตั้ง</div>
+                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">1. สอนติดตั้ง</div>
                             <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Installation Guide (YouTube)</div>
                         </div>
                     </div>
@@ -159,40 +198,18 @@
                 </p>
             </div>
 
-            <!-- 2. ลิ้งพาแนล (MAIN SYSTEM) -->
-            <div class="btn-aurora bg-gradient-to-br from-red-950/70 via-neutral-900/90 to-black border-2 border-red-600/80 rounded-2xl p-4 main-panel-glow relative group overflow-hidden">
-                <div class="absolute -top-1 -right-1 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[9px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg font-orbitron">
-                    <i class="fa-solid fa-bolt mr-1"></i> MAIN SYSTEM
-                </div>
-                <a href="https://viper-x.mrpcs.online" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between mt-1">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white text-2xl shadow-lg shadow-red-600/50 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-sliders"></i>
-                        </div>
-                        <div>
-                            <div class="text-xl font-extrabold text-white tracking-wide">ลิ้งพาแนล <span class="text-red-400">(WEB PANEL)</span></div>
-                            <div class="text-[10px] text-red-200 en-text font-bold uppercase tracking-widest">Access Control Center</div>
-                        </div>
-                    </div>
-                    <div class="w-9 h-9 rounded-xl bg-red-600/30 border border-red-500/60 flex items-center justify-center text-white group-hover:bg-red-600 transition-all">
-                        <i class="fa-solid fa-arrow-up-right-from-square text-sm group-hover:scale-110 transition-transform"></i>
-                    </div>
-                </a>
-                <p class="text-xs text-gray-200 mt-3 pt-2 border-t border-red-900/40 flex items-center gap-2 font-normal">
-                    <i class="fa-solid fa-fire text-red-400 text-[10px]"></i>
-                    <span>ทางเข้าสู่ระบบจัดการสมาชิก ควบคุมสคริปต์ และการตั้งค่าใช้งานหลักทั้งหมด</span>
-                </p>
-            </div>
-
-            <!-- 3. สอนใช้งาน -->
-            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
-                <a href="https://youtu.be/OwQr_1p1mu8?si=VO4oCV0NWqkNJZ8P" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+            <!-- STEP 2: สอนใช้งาน -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group relative overflow-hidden">
+                <span class="absolute top-2 right-3 text-[10px] font-extrabold text-red-500/80 font-orbitron tracking-widest bg-red-950/40 px-2 py-0.5 rounded-md border border-red-900/30">
+                    STEP 2
+                </span>
+                <a href="https://youtu.be/OwQr_1p1mu8?si=VO4oCV0NWqkNJZ8P" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between mt-1">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-neutral-900 border border-red-600/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
                             <i class="fa-solid fa-play text-xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">สอนใช้งาน</div>
+                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">2. สอนใช้งาน</div>
                             <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Video Tutorial (YouTube)</div>
                         </div>
                     </div>
@@ -206,15 +223,43 @@
                 </p>
             </div>
 
-            <!-- 4. ซื้อพาแนล -->
-            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
-                <a href="https://vaiperxmod.vexzy.xyz" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+            <!-- STEP 3: ลิ้งพาแนล (MAIN SYSTEM - ปุ่มหลัก) -->
+            <div class="btn-aurora bg-gradient-to-br from-red-950/70 via-neutral-900/90 to-black border-2 border-red-600/80 rounded-2xl p-4 main-panel-glow relative group overflow-hidden">
+                <div class="absolute -top-1 -right-1 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[9px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg font-orbitron">
+                    <i class="fa-solid fa-bolt mr-1"></i> STEP 3 • MAIN SYSTEM
+                </div>
+                <button onclick="openHomeScreenGuide()" class="w-full flex items-center justify-between mt-2 text-left">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white text-2xl shadow-lg shadow-red-600/50 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div>
+                            <div class="text-xl font-extrabold text-white tracking-wide">3. ลิ้งพาแนล <span class="text-red-400">(WEB PANEL)</span></div>
+                            <div class="text-[10px] text-red-200 en-text font-bold uppercase tracking-widest">Access Control Center</div>
+                        </div>
+                    </div>
+                    <div class="w-9 h-9 rounded-xl bg-red-600/30 border border-red-500/60 flex items-center justify-center text-white group-hover:bg-red-600 transition-all">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-sm group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </button>
+                <p class="text-xs text-gray-200 mt-3 pt-2 border-t border-red-900/40 flex items-center gap-2 font-normal">
+                    <i class="fa-solid fa-fire text-red-400 text-[10px]"></i>
+                    <span>ทางเข้าสู่ระบบจัดการสมาชิก ควบคุมสคริปต์ และการตั้งค่าใช้งานหลักทั้งหมด</span>
+                </p>
+            </div>
+
+            <!-- STEP 4: ซื้อพาแนล -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group relative overflow-hidden">
+                <span class="absolute top-2 right-3 text-[10px] font-extrabold text-gray-500 font-orbitron tracking-widest bg-neutral-800 px-2 py-0.5 rounded-md border border-neutral-700">
+                    STEP 4
+                </span>
+                <a href="https://vaiperxmod.vexzy.xyz" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between mt-1">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-neutral-900 border border-red-600/30 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
                             <i class="fa-solid fa-cart-shopping text-xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">ซื้อพาแนล</div>
+                            <div class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">4. ซื้อพาแนล</div>
                             <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Store & Automatic Key</div>
                         </div>
                     </div>
@@ -228,15 +273,18 @@
                 </p>
             </div>
 
-            <!-- 5. แจ้งปัญหา ดิสคอร์ด -->
-            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-indigo-500/50 rounded-2xl p-4 group">
-                <a href="https://discord.gg/A8Y6pbddRr" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
+            <!-- STEP 5: แจ้งปัญหา ดิสคอร์ด -->
+            <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-indigo-500/50 rounded-2xl p-4 group relative overflow-hidden">
+                <span class="absolute top-2 right-3 text-[10px] font-extrabold text-indigo-400/80 font-orbitron tracking-widest bg-indigo-950/40 px-2 py-0.5 rounded-md border border-indigo-900/30">
+                    STEP 5
+                </span>
+                <a href="https://discord.gg/A8Y6pbddRr" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between mt-1">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-950 to-neutral-900 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-md">
                             <i class="fa-brands fa-discord text-2xl"></i>
                         </div>
                         <div>
-                            <div class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">แจ้งปัญหา ดิสคอร์ด</div>
+                            <div class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">5. แจ้งปัญหา ดิสคอร์ด</div>
                             <div class="text-[10px] text-gray-400 en-text uppercase tracking-widest font-semibold">Discord Official Support</div>
                         </div>
                     </div>
@@ -260,16 +308,12 @@
         </div>
     </div>
 
-    <!-- ================= 🚨 IMPORTANT ANNOUNCEMENT MODAL (บังคับอ่าน 5 วินาที) ================= -->
+    <!-- ================= 🚨 IMPORTANT ANNOUNCEMENT MODAL ================= -->
     <div id="noticeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg">
-        
         <div class="relative max-w-md w-full bg-gradient-to-b from-neutral-900 via-neutral-950 to-black border-2 border-red-600/80 rounded-3xl p-6 shadow-[0_0_60px_rgba(220,38,38,0.5)] animate-modal overflow-hidden">
-            
-            <!-- Laser Accent -->
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-rose-500 to-red-600"></div>
 
-            <!-- Warning Icon -->
-            <div class="text-center mt-2 mb-4">
+            <div class="text-center mt-2 mb-3">
                 <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-red-950/80 border border-red-500/50 text-red-500 text-3xl warn-pulse mb-2 shadow-inner">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
@@ -281,47 +325,102 @@
                 </p>
             </div>
 
-            <!-- Content Announcement Box -->
-            <div class="bg-red-950/30 border border-red-600/40 rounded-2xl p-4 text-center my-4 space-y-3 relative overflow-hidden">
-                <div class="text-sm sm:text-base font-medium text-gray-100 leading-relaxed">
+            <div class="bg-red-950/30 border border-red-600/40 rounded-2xl p-4 text-center my-3 space-y-3 relative overflow-hidden">
+                <div class="bg-amber-500/10 border border-amber-500/40 py-2 px-3 rounded-xl">
+                    <div class="text-sm sm:text-base font-extrabold text-amber-400 tracking-wide flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-gamepad text-amber-400"></i>
+                        <span>รองรับเฉพาะตัวเกม Free Fire ธรรมดาเท่านั้น!</span>
+                    </div>
+                    <div class="text-[11px] text-amber-300/80 font-light mt-0.5">
+                        (ห้ามใช้กับ Free Fire MAX เด็ดขาด)
+                    </div>
+                </div>
+
+                <div class="text-sm font-medium text-gray-100 leading-relaxed pt-1">
                     ขอแจ้งอีกครั้ง <span class="text-red-400 font-bold underline underline-offset-4">หากใช้คีย์ในเว็บต้องใช้ในเว็บ</span> หรือ <span class="text-red-400 font-bold underline underline-offset-4">ใช้ในจอหลักก็ต้องใช้ในจอหลักตลอด</span>
                 </div>
-                <div class="text-xs text-amber-300/90 font-light bg-black/40 p-2.5 rounded-xl border border-amber-500/20">
+                <div class="text-xs text-amber-200/90 font-light bg-black/40 p-2 rounded-xl border border-amber-500/20">
                     <i class="fa-solid fa-circle-exclamation text-amber-400 mr-1"></i>
                     ไม่งั้นคีย์จะใช้งานไม่ได้เพราะ <b>UID เครื่องจะไม่ตรงกัน</b>
                 </div>
+
                 <div class="text-xs sm:text-sm font-extrabold text-red-500 bg-red-950/80 py-2 px-3 rounded-xl border border-red-600/50 uppercase tracking-wide">
                     #ไม่เคลมทุกกรณีแจ้งให้ทราบ
                 </div>
             </div>
 
-            <!-- Lock Countdown & Close Button Section -->
-            <div class="mt-6 text-center">
+            <div class="mt-5 text-center">
                 <button id="closeNoticeBtn" disabled onclick="closeNoticeModal()" class="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 bg-neutral-800 text-gray-500 cursor-not-allowed border border-neutral-700">
                     <i id="btnIcon" class="fa-solid fa-lock text-xs"></i>
                     <span id="btnText">โปรดอ่านประกาศ (<span id="timerCount" class="font-orbitron font-extrabold text-red-400">5</span>s)</span>
                 </button>
             </div>
-
         </div>
     </div>
 
-    <!-- JAVASCRIPT COUNTDOWN & CONTROL -->
+    <!-- ================= 📱 ADD TO HOME SCREEN GUIDE MODAL ================= -->
+    <div id="homeScreenModal" class="fixed inset-0 z-50 hidden flex-col items-center justify-end sm:justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="relative max-w-sm w-full bg-gradient-to-b from-neutral-900 to-black border-2 border-red-600/80 rounded-3xl p-6 shadow-[0_0_50px_rgba(239,68,68,0.5)] animate-modal mb-6 sm:mb-0">
+            
+            <button onclick="closeHomeScreenGuide()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-neutral-800 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="text-center mt-1 mb-4">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-red-950/80 border border-red-500/50 text-red-500 text-2xl mb-2">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white uppercase tracking-wider font-orbitron">
+                    วิธีเพิ่มเข้าหน้าจอหลัก
+                </h3>
+                <p class="text-xs text-red-400 font-medium mt-0.5">
+                    แนะนำให้เพิ่มเข้าหน้าจอหลักก่อนเข้าใช้งาน Panel
+                </p>
+            </div>
+
+            <div class="space-y-3 bg-neutral-950/80 border border-neutral-800 rounded-2xl p-4 text-xs">
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-red-600 text-white font-bold flex items-center justify-center shrink-0 text-[11px] font-orbitron">1</span>
+                    <p class="text-gray-200 leading-relaxed pt-0.5">
+                        กดปุ่ม <span class="text-red-400 font-bold">แชร์ (Share)</span> <i class="fa-solid fa-arrow-up-from-bracket text-red-400"></i> ที่แถบเครื่องมือด้านล่าง Safari
+                    </p>
+                </div>
+                <div class="flex items-start gap-3 border-t border-neutral-800/80 pt-3">
+                    <span class="w-6 h-6 rounded-full bg-red-600 text-white font-bold flex items-center justify-center shrink-0 text-[11px] font-orbitron">2</span>
+                    <p class="text-gray-200 leading-relaxed pt-0.5">
+                        เลื่อนลงมาแล้วเลือกเมนู <span class="text-red-400 font-bold">"เพิ่มไปยังหน้าจอโฮม"</span> <i class="fa-regular fa-square-plus text-red-400"></i> (Add to Home Screen)
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-5 space-y-2">
+                <a href="https://viper-x.mrpcs.online" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white flex items-center justify-center gap-2 shadow-lg shadow-red-600/30 transition-all">
+                    <span>ไปยังเว็บไซต์ Panel ทันที</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="text-center mt-4 bounce-arrow">
+                <i class="fa-solid fa-circle-arrow-down text-3xl text-red-500 drop-shadow-[0_0_10px_#ef4444]"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CONTROL -->
     <script>
+        // --- 1. COUNTDOWN NOTICE ---
         let timeLeft = 5;
         const timerElement = document.getElementById('timerCount');
         const closeBtn = document.getElementById('closeNoticeBtn');
         const btnText = document.getElementById('btnText');
         const btnIcon = document.getElementById('btnIcon');
 
-        // ฟังก์ชันนับถอยหลัง 5 วินาที
         const countdownTimer = setInterval(() => {
             timeLeft--;
             if (timeLeft > 0) {
                 timerElement.innerText = timeLeft;
             } else {
                 clearInterval(countdownTimer);
-                // เมื่อครบ 5 วินาที ปลดล็อกปุ่มปิดทันที
                 closeBtn.disabled = false;
                 closeBtn.className = "w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white shadow-lg shadow-red-600/40 cursor-pointer transform hover:scale-[1.02] active:scale-95";
                 btnIcon.className = "fa-solid fa-circle-check text-sm text-white";
@@ -329,10 +428,21 @@
             }
         }, 1000);
 
-        // ฟังก์ชันปิด Modal ประกาศ
         function closeNoticeModal() {
-            const modal = document.getElementById('noticeModal');
-            modal.style.display = 'none';
+            document.getElementById('noticeModal').style.display = 'none';
+        }
+
+        // --- 2. ADD TO HOME SCREEN GUIDE CONTROL ---
+        function openHomeScreenGuide() {
+            const modal = document.getElementById('homeScreenModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeHomeScreenGuide() {
+            const modal = document.getElementById('homeScreenModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }
     </script>
 
