@@ -84,11 +84,20 @@
 
         /* Modal Animation Popup */
         @keyframes modalShow {
-            0% { opacity: 0; transform: scale(0.8); }
+            0% { opacity: 0; transform: scale(0.85); }
             100% { opacity: 1; transform: scale(1); }
         }
         .animate-modal {
             animation: modalShow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Pulse Warning Icon */
+        .warn-pulse {
+            animation: warnGlow 1.2s infinite alternate;
+        }
+        @keyframes warnGlow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.6)); }
+            100% { transform: scale(1.1); filter: drop-shadow(0 0 25px rgba(239, 68, 68, 1)); }
         }
     </style>
 </head>
@@ -175,7 +184,7 @@
                 </p>
             </div>
 
-            <!-- 3. สอนใช้งาน (อัปเดตลิงก์ YouTube ใหม่แล้ว) -->
+            <!-- 3. สอนใช้งาน -->
             <div class="btn-aurora bg-neutral-900/80 border border-neutral-800 hover:border-red-500/50 rounded-2xl p-4 group">
                 <a href="https://youtu.be/OwQr_1p1mu8?si=VO4oCV0NWqkNJZ8P" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between">
                     <div class="flex items-center gap-4">
@@ -251,52 +260,80 @@
         </div>
     </div>
 
-    <!-- ================= PROMOTION POPUP MODAL ================= -->
-    <div id="promoModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
-        <div class="relative max-w-sm w-full bg-neutral-900 border border-red-600/40 rounded-2xl shadow-2xl overflow-hidden animate-modal">
+    <!-- ================= 🚨 IMPORTANT ANNOUNCEMENT MODAL (บังคับอ่าน 5 วินาที) ================= -->
+    <div id="noticeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg">
+        
+        <div class="relative max-w-md w-full bg-gradient-to-b from-neutral-900 via-neutral-950 to-black border-2 border-red-600/80 rounded-3xl p-6 shadow-[0_0_60px_rgba(220,38,38,0.5)] animate-modal overflow-hidden">
             
-            <button onclick="closeModal()" class="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95">
-                <i class="fa-solid fa-xmark text-sm"></i>
-            </button>
+            <!-- Laser Accent -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-rose-500 to-red-600"></div>
 
-            <div class="relative w-full overflow-hidden bg-black flex items-center justify-center">
-                <img src="https://i.postimg.cc/1R8ZVGbM/D56849CD-9352-4DB3-8B2C-7F0AE052A28B.png" alt="ViperX Promotion" class="w-full h-auto object-cover max-h-[70vh]">
-                
-                <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm border border-neutral-700/80 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-md font-orbitron">
-                    1 / 2
+            <!-- Warning Icon -->
+            <div class="text-center mt-2 mb-4">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-red-950/80 border border-red-500/50 text-red-500 text-3xl warn-pulse mb-2 shadow-inner">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
+                <h2 class="text-2xl font-extrabold text-white uppercase tracking-wider font-orbitron">
+                    ประกาศสำคัญจาก <span class="text-red-500">VIPERX</span>
+                </h2>
+                <p class="text-[11px] text-red-400 uppercase font-bold tracking-widest mt-0.5">
+                    IMPORTANT NOTICE • PLEASE READ CAREFULLY
+                </p>
+            </div>
 
-                <label class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-sm border border-neutral-700/80 text-gray-200 text-xs px-2.5 py-1 rounded-md flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
-                    <input type="checkbox" id="hideCheck" class="rounded accent-red-600 w-3.5 h-3.5 cursor-pointer">
-                    <span>ไม่แสดงอีกใน 24 ชั่วโมง</span>
-                </label>
+            <!-- Content Announcement Box -->
+            <div class="bg-red-950/30 border border-red-600/40 rounded-2xl p-4 text-center my-4 space-y-3 relative overflow-hidden">
+                <div class="text-sm sm:text-base font-medium text-gray-100 leading-relaxed">
+                    ขอแจ้งอีกครั้ง <span class="text-red-400 font-bold underline underline-offset-4">หากใช้คีย์ในเว็บต้องใช้ในเว็บ</span> หรือ <span class="text-red-400 font-bold underline underline-offset-4">ใช้ในจอหลักก็ต้องใช้ในจอหลักตลอด</span>
+                </div>
+                <div class="text-xs text-amber-300/90 font-light bg-black/40 p-2.5 rounded-xl border border-amber-500/20">
+                    <i class="fa-solid fa-circle-exclamation text-amber-400 mr-1"></i>
+                    ไม่งั้นคีย์จะใช้งานไม่ได้เพราะ <b>UID เครื่องจะไม่ตรงกัน</b>
+                </div>
+                <div class="text-xs sm:text-sm font-extrabold text-red-500 bg-red-950/80 py-2 px-3 rounded-xl border border-red-600/50 uppercase tracking-wide">
+                    #ไม่เคลมทุกกรณีแจ้งให้ทราบ
+                </div>
+            </div>
+
+            <!-- Lock Countdown & Close Button Section -->
+            <div class="mt-6 text-center">
+                <button id="closeNoticeBtn" disabled onclick="closeNoticeModal()" class="w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 bg-neutral-800 text-gray-500 cursor-not-allowed border border-neutral-700">
+                    <i id="btnIcon" class="fa-solid fa-lock text-xs"></i>
+                    <span id="btnText">โปรดอ่านประกาศ (<span id="timerCount" class="font-orbitron font-extrabold text-red-400">5</span>s)</span>
+                </button>
             </div>
 
         </div>
     </div>
 
-    <!-- JAVASCRIPT CONTROL -->
+    <!-- JAVASCRIPT COUNTDOWN & CONTROL -->
     <script>
-        function closeModal() {
-            const modal = document.getElementById('promoModal');
-            const hideCheck = document.getElementById('hideCheck');
-            
-            if (hideCheck.checked) {
-                const expiryTime = new Date().getTime() + (24 * 60 * 60 * 1000);
-                localStorage.setItem('viperx_hide_promo', expiryTime);
+        let timeLeft = 5;
+        const timerElement = document.getElementById('timerCount');
+        const closeBtn = document.getElementById('closeNoticeBtn');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
+
+        // ฟังก์ชันนับถอยหลัง 5 วินาที
+        const countdownTimer = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerElement.innerText = timeLeft;
+            } else {
+                clearInterval(countdownTimer);
+                // เมื่อครบ 5 วินาที ปลดล็อกปุ่มปิดทันที
+                closeBtn.disabled = false;
+                closeBtn.className = "w-full py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white shadow-lg shadow-red-600/40 cursor-pointer transform hover:scale-[1.02] active:scale-95";
+                btnIcon.className = "fa-solid fa-circle-check text-sm text-white";
+                btnText.innerHTML = "รับทราบและเข้าใจแล้ว (ปิดประกาศ)";
             }
-            
+        }, 1000);
+
+        // ฟังก์ชันปิด Modal ประกาศ
+        function closeNoticeModal() {
+            const modal = document.getElementById('noticeModal');
             modal.style.display = 'none';
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const hideUntil = localStorage.getItem('viperx_hide_promo');
-            const now = new Date().getTime();
-
-            if (hideUntil && now < parseInt(hideUntil)) {
-                document.getElementById('promoModal').style.display = 'none';
-            }
-        });
     </script>
 
 </body>
